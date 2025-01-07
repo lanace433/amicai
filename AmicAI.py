@@ -19,9 +19,9 @@ if "thread_id" not in st.session_state:
 if "language" not in st.session_state:
     st.session_state.language = None
 
-# st.set_page_config(page_title="AmicAI")
-# img = Image.open("logo.png")
-# st.sidebar.image(img)
+st.set_page_config(page_title="AmicAI")
+img = Image.open("logo.png")
+st.sidebar.image(img)
 
 language = st.sidebar.selectbox("Select your language:", ["English", "Slovenian"])
 st.session_state.language = language
