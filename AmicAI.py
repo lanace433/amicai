@@ -1,6 +1,6 @@
 import sys
 sys.path.append("/opt/miniconda3/lib/python3.12/site-packages")
-import openai 
+from openai import OpenAI 
 import time
 from dotenv import load_dotenv
 import os
@@ -9,8 +9,7 @@ from PIL import Image
 
 load_dotenv()
 
-# client = OpenAI(api_key = os.getenv("api_key"))
-openai.api_key = os.getenv("api_key")
+client = OpenAI(api_key = os.getenv("api_key"))
 assistant_id = os.getenv("assistant_key")
 
 if "start_chat" not in st.session_state:
