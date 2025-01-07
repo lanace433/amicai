@@ -8,7 +8,6 @@ import streamlit as st
 from PIL import Image
 
 load_dotenv()
-print("Current Working Directory:", os.getcwd())
 
 client = OpenAI(api_key = os.getenv("api_key"))
 assistant_id = os.getenv("assistant_key")
@@ -20,9 +19,9 @@ if "thread_id" not in st.session_state:
 if "language" not in st.session_state:
     st.session_state.language = None
 
-st.set_page_config(page_title="AmicAI")
-img = Image.open("logo.png")
-st.sidebar.image(img)
+# st.set_page_config(page_title="AmicAI")
+# img = Image.open("logo.png")
+# st.sidebar.image(img)
 
 language = st.sidebar.selectbox("Select your language:", ["English", "Slovenian"])
 st.session_state.language = language
