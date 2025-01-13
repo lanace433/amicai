@@ -9,7 +9,7 @@ from PIL import Image
 
 load_dotenv()
 
-client = OpenAI(api_key = os.getenv("api_key"))
+client = OpenAI(api_key=os.getenv("api_key"))
 assistant_id = os.getenv("assistant_key")
 
 if "start_chat" not in st.session_state:
@@ -20,8 +20,13 @@ if "language" not in st.session_state:
     st.session_state.language = None
 
 st.set_page_config(page_title="AmicAI")
-img = Image.open("logo.png")
-st.sidebar.image(img)
+
+@st.cache_resource
+def load_logo():
+    return Image.open("logo.png")
+
+img = load_logo()
+st.sidebar.image(img)  # Cached and stable logo
 
 language = st.sidebar.selectbox("Select your language:", ["English", "Slovenian"])
 st.session_state.language = language
@@ -55,7 +60,6 @@ if st.session_state.start_chat:
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
@@ -74,7 +78,6 @@ if st.session_state.start_chat:
         run = client.beta.threads.runs.create(
             thread_id=st.session_state.thread_id,
             assistant_id=assistant_id,
-            # instructions=assistant_instructions # Set instructions dynamically based on language
         )
 
         while run.status != 'completed':
