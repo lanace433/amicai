@@ -191,11 +191,10 @@ Osredotoči se na njihove interese.
     )
     
     # Send instructions as a system message
-    openai.ChatCompletion.create(
-    model="gpt-4",
-    messages=[
-        {"role": "system", "content": instructions},
-    ]
+    client.beta.threads.messages.create(
+    thread_id=st.session_state.thread_id,
+    role="system",
+    content=instructions
 )
 
 # Page title and description
